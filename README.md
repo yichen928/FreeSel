@@ -13,7 +13,7 @@ Our method is significantly more efficient than prior arts by hundreds of times,
 </div>
 
 <div align="center">
-    <img src="figs/performance.jpg", width="600">
+    <img src="figs/performance.jpg", width="400">
 </div>
 
 
