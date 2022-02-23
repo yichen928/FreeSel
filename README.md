@@ -1,5 +1,5 @@
 # Towards General and Efficient Active Learning
-This repo is official code implementation for the paper "Towards General and Efficient Active Learning". You can find the paper on [arXiv](https://arxiv.org/abs/2112.07963). Code is coming soon.
+This repo is official code implementation for the paper "Towards General and Efficient Active Learning". You can find the paper on [arXiv](https://arxiv.org/abs/2112.07963). 
 
 Existing active learning work follows a cumbersome pipeline by repeating the time-consuming model training and batch data selection multiple times on each dataset separately. We challenge this status-quo by proposing a novel general and efficient active learning (GEAL) method in this paper. Utilizing a publicly available model pre-trained on a large dataset, our method can conduct data selection processes on different datasets with a single-pass inference of the same model.
 
