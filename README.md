@@ -36,7 +36,7 @@ Please follow the steps in our [instruction](data_selection/README.md) for data 
 ## Credits
 
 + The transformer backbone follows [dino](https://github.com/facebookresearch/dino).
-+ The downstream object detection code comes from [mmdetection](https://github.com/open-mmlab/mmdetection).
++ The downstream object detection task code comes from [mmdetection](https://github.com/open-mmlab/mmdetection).
 
 We sincerely thank the authors for their excellent work!
 
