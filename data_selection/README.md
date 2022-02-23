@@ -49,5 +49,5 @@ Please put the files in the following structure:
 
 + **PASCAL VOC**
 
-  Please following our [instruction](../downstream/detection/README.md) for downstream object detection task.
+  Please following our [instruction](../downstream/detection) for downstream object detection task.
 
