@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 Please follow the steps in our [instruction](data_selection/README.md) for data selection.
 
-### Downstream Tasks
+## Downstream Tasks
 
 + **Object Detection**: Please follow the steps in our [instruction](downstream/detection/README.md) for object detection.
 
