@@ -17,7 +17,31 @@ Our method is significantly more efficient than prior arts by hundreds of times,
 </div>
 
 
+## Installation
+
+This codebase has been developed with CUDA 11.2, python 3.7, PyTorch version 1.7.1, and torchvision 0.8.2.  Please install [PyTorch](https://pytorch.org/) according to the instruction on the official website, and run the following command to install other necessary modules.
+
+```
+pip install -r requirements.txt
+```
+
+## Data Selection
+
+Please follow the steps in our [instruction](data_selection/README.md) for data selection.
+
+### Downstream Tasks
+
++ **Object Detection**: Please follow the steps in our [instruction](downstream/detection/README.md) for object detection.
+
+## Credits
+
++ The transformer backbone follows [dino](https://github.com/facebookresearch/dino).
++ The downstream object detection code comes from [mmdetection](https://github.com/open-mmlab/mmdetection).
+
+We sincerely thank the authors for their excellent work!
+
 ## Citation
+
 If you find our research helpful, please consider cite it as:
 ```
 @article{xie2021towards,
