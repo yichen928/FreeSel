@@ -22,7 +22,15 @@ Our method is significantly more efficient than prior arts by hundreds of times,
 This codebase has been developed with CUDA 11.2, python 3.7, PyTorch version 1.7.1, and torchvision 0.8.2.  Please install [PyTorch](https://pytorch.org/) according to the instruction on the official website, and run the following command to install other necessary modules.
 
 ```
-pip install -r requirements.txt
+pip install -r torchextractor==0.3.0 pillow
+```
+
+You also need to install **[ kmeans_pytorch](https://github.com/subhadarship/kmeans_pytorch)** from the source code. *You would get a wrong version if directly install it with pypi.*
+
+```
+git clone https://github.com/subhadarship/kmeans_pytorch
+cd kmeans_pytorch
+pip install --editable .
 ```
 
 ## Data Selection
