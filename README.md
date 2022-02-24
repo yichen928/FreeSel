@@ -25,7 +25,7 @@ This codebase has been developed with CUDA 11.2, python 3.7, PyTorch version 1.7
 pip install -r torchextractor==0.3.0 pillow
 ```
 
-You also need to install **[ kmeans_pytorch](https://github.com/subhadarship/kmeans_pytorch)** from the source code. *You would get a wrong version if directly install it with pypi.*
+You also need to install **[ kmeans_pytorch](https://github.com/subhadarship/kmeans_pytorch)** from the source code. *You would get a wrong version if directly installing it through pypi.*
 
 ```
 git clone https://github.com/subhadarship/kmeans_pytorch
