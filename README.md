@@ -43,6 +43,7 @@ Please follow the steps in our [instruction](data_selection) for data selection.
 
 ## Credits
 
++ The K-Means module comes from [kmeans_pytorch](https://github.com/subhadarship/kmeans_pytorch).
 + The transformer backbone follows [dino](https://github.com/facebookresearch/dino).
 + The downstream object detection task code comes from [mmdetection](https://github.com/open-mmlab/mmdetection).
 
