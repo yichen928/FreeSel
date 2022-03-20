@@ -180,12 +180,13 @@ if __name__ == '__main__':
     parser.add_argument('--num_workers', default=16, type=int, help='Number of data loading workers per GPU.')
     parser.add_argument('--data_path', default='data', type=str, help='path for the PSCAL VOC dataset')
     parser.add_argument('--threshold', default=0.5, type=float, help='the attention ratio')
-    parser.add_argument('--centroid_num', default=25, type=int, help='number of kmeans centers')
+    parser.add_argument('--centroid_num', default=5, type=int, help='number of kmeans centers')
     parser.add_argument('--dist_type', type=str, default="cosine", help="cosine or euclidean for K-center-greedy")
-    parser.add_argument('--kmeans_dist_type', type=str, default="cosine", help="cosine or euclidean for kmeans")
+    parser.add_argument('--kmeans_dist_type', type=str, default="euclidean", help="cosine or euclidean for kmeans")
+    parser.add_argument('--sampling', type=str, default="prob", choices=["prob", "FDS"], help="strategy for sampling")
     parser.add_argument('--selected_num', type=int, default=3000, help="selected sample number")
     parser.add_argument('--random_num', type=int, default=None, help="randomly select some samples")
-    parser.add_argument('--save_name', type=str, default="dino_vits16_thre5e-1_kmeans25_cosine_FPS")
+    parser.add_argument('--save_name', type=str, default="dino_vits16_thre5e-1_kmeans5_cosine_prob")
     args = parser.parse_args()
 
     print("\n".join("%s: %s" % (k, str(v)) for k, v in sorted(dict(vars(args)).items())))
@@ -197,10 +198,16 @@ if __name__ == '__main__':
 
     print("Select Samples...")
     if args.random_num is None:
-        selected_sample = utils.farthest_distance_sample_dense(merged_features, id2idx, args.selected_num, partial(utils.get_distance, type=args.dist_type))
+        if args.sampling == "prob":
+            selected_sample = utils.prob_seed_dense(merged_features, id2idx, args.selected_num, partial(utils.get_distance, type=args.dist_type))
+        else:
+            selected_sample = utils.farthest_distance_sample_dense(merged_features, id2idx, args.selected_num, partial(utils.get_distance, type=args.dist_type))
     else:
         init_ids = random.sample(range(len(id2idx)), args.random_num)
-        selected_sample = utils.farthest_distance_sample_dense(merged_features, id2idx, args.selected_num, partial(utils.get_distance, type=args.dist_type), init_ids=init_ids)
+        if args.sampling == "prob":
+            selected_sample = utils.prob_seed_dense(merged_features, id2idx, args.selected_num, partial(utils.get_distance, type=args.dist_type), init_ids=init_ids)
+        else:
+            selected_sample = utils.farthest_distance_sample_dense(merged_features, id2idx, args.selected_num, partial(utils.get_distance, type=args.dist_type), init_ids=init_ids)
 
     samples_07 = []
     samples_12 = []

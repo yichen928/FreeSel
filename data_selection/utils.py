@@ -394,3 +394,50 @@ def farthest_distance_sample_dense(all_features, id2idx, sample_num, dist_func, 
     assert len(set(sample_ids)) == sample_num
     return sample_ids
 
+
+def prob_seed_dense(all_features, id2idx, sample_num, dist_func, init_ids=[]):
+    if len(init_ids) >= sample_num:
+        print("Initial samples are enough")
+        return init_ids
+
+    feature_num = all_features.shape[0]
+    total_num = len(id2idx)
+    if total_num <= sample_num:
+        print("No enough features")
+        return list(range(total_num))
+
+    idx2id = []
+    for id in id2idx:
+        idxs = id2idx[id]
+        idx2id.extend([id]*idxs.shape[0])
+    assert len(idx2id) == feature_num
+
+    if len(init_ids) == 0:
+        sample_ids = random.sample(range(total_num), 1)
+    else:
+        sample_ids = init_ids
+
+    distances = torch.zeros(feature_num).cuda() + 1e20
+    print(torch.max(distances, dim=0)[0])
+
+    for i, init_id in enumerate(sample_ids):
+        distances = update_distance_dense(distances, all_features, all_features[id2idx[init_id]], dist_func)
+        if i % 100 == 1:
+            print(i, torch.max(distances, dim=0)[0], "random")
+            print(all_features.shape, all_features[id2idx[init_id]].shape)
+
+    while len(sample_ids) < sample_num:
+        prob = distances ** 2 / torch.sum(distances ** 2)
+        prob = prob.cpu().numpy()
+        new_featid = np.random.choice(distances.shape[0], p=prob)
+
+        # new_featid = torch.max(distances, dim=0)[1]
+        new_id = idx2id[new_featid]
+        distances = update_distance_dense(distances, all_features, all_features[id2idx[new_id]], dist_func)
+        sample_ids.append(new_id)
+        if len(sample_ids) % 100 == 1:
+            print(len(sample_ids))
+            print(len(sample_ids), torch.max(distances, dim=0)[0], "prob")
+            print(all_features.shape, all_features[id2idx[new_id]].shape)
+    assert len(set(sample_ids)) == sample_num
+    return sample_ids
