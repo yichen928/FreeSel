@@ -16,6 +16,9 @@ Our method is significantly more efficient than prior arts by hundreds of times,
     <img src="figs/performance.jpg", width="400">
 </div>
 
+## Update
++ [2022-2-23] An updated version of GEAL is released with better efficiency, stability, and higher performance.
++ [2022-2-23] Code for object detection task is available.
 
 ## Installation
 
