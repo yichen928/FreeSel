@@ -17,6 +17,7 @@ Our method is significantly more efficient than prior arts by hundreds of times,
 </div>
 
 ## Update
++ [2022-6-24] Code for image classification task is available.
 + [2022-3-20] An updated version of GEAL is released with better efficiency, stability, and performance.
 + [2022-2-23] Code for object detection task is available.
 
@@ -42,13 +43,15 @@ Please follow the steps in our [instruction](data_selection) for data selection.
 
 ## Downstream Tasks
 
-+ **Object Detection**: Please follow the steps in our [instruction](downstream/detection) for object detection.
++ **Object Detection**: Please follow the steps in our [instruction](downstream/detection) for object detection downstream task.
++ **Image Classification**: Please follow the steps in our [instruction](downstream/classification) for image classification downstream task.
 
 ## Credits
 
 + The K-Means module comes from [kmeans_pytorch](https://github.com/subhadarship/kmeans_pytorch).
 + The transformer backbone follows [dino](https://github.com/facebookresearch/dino).
 + The downstream object detection task code comes from [mmdetection](https://github.com/open-mmlab/mmdetection).
++ The downstream image classification task code comes from [mmclassification](https://github.com/open-mmlab/mmclassification).
 
 We sincerely thank the authors for their excellent work!
 
