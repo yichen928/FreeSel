@@ -9,7 +9,7 @@ We introduce how to select training samples with GEAL in this file. These select
   You can download both PASCAL VOC 2007 and PASCAL VOC 2012 from the [official website](http://host.robots.ox.ac.uk/pascal/VOC/index.html). 
 + **CIFAR10**
   
-  The code will be downloaded automatically.
+  The data will be downloaded automatically.
 
 ### Pre-trained Model
 
