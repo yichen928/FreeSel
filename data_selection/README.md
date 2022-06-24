@@ -7,6 +7,9 @@ We introduce how to select training samples with GEAL in this file. These select
 + **PASCAL VOC**
 
   You can download both PASCAL VOC 2007 and PASCAL VOC 2012 from the [official website](http://host.robots.ox.ac.uk/pascal/VOC/index.html). 
++ **CIFAR10**
+  
+  The code will be downloaded automatically.
 
 ### Pre-trained Model
 
@@ -20,6 +23,9 @@ Please put the files in the following structure:
 |--GEAL_active_learning
 |	|--data_selection
 |		|--data
+|			|--cifar10
+|					|--cifar-10-batches-py
+|					|--splits
 |			|--VOCdevkit
 |				|--VOC2007
 |					|--Annotations
@@ -37,10 +43,20 @@ Please put the files in the following structure:
 
 + **PASCAL VOC**
 
-  You can select data samples with the following command. It will generate two splits in `VOCdevkit/VOC2007/ImageSets/Main` and `VOCdevkit/VOC2012/ImageSets/Main`.
+  You can select data samples with the following command. It will generate two splits in `data/VOCdevkit/VOC2007/ImageSets/Main` and `data/VOCdevkit/VOC2012/ImageSets/Main`.
 
   ```
   python voc_dense_kmeans.py --selected 3000
+  ```
+
+  The selected sample number can be specified through `--selected_num`  argument. 
+
++ **Image Classification**
+
+  You can select data samples with the following command. It will generate a split in `data/cifar10/splits`.
+
+  ```
+  python cifar_dense_kmeans.py --selected 3000
   ```
 
   The selected sample number can be specified through `--selected_num`  argument. 
@@ -50,4 +66,7 @@ Please put the files in the following structure:
 + **PASCAL VOC**
 
   Please following our [instruction](../downstream/detection) for downstream object detection task.
++ **CIFAR10**
+
+  Please following our [instruction](../downstream/classification) for downstream image classification task.
 
