@@ -24,8 +24,8 @@ Please put the files in the following structure:
 |	|--data_selection
 |		|--data
 |			|--cifar10
-|					|--cifar-10-batches-py
-|					|--splits
+|				|--cifar-10-batches-py
+|				|--splits
 |			|--VOCdevkit
 |				|--VOC2007
 |					|--Annotations
