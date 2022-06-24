@@ -10,6 +10,6 @@ The object detection code is borrowed from **[mmdetection](https://github.com/op
 ##### Command for reference:
 
 ```
-python tools/train.py configs/pascal_voc/ssd300_voc0712_al.py --work-dir work_dirs/ssd300_voc0712_al_dino_vits16_thre5e-1_kmeans25_cosine_FPS_3000 --cfg-options data.train.dataset.ann_file=data/VOCdevkit/VOC2007/ImageSets/Main/trainval_dino_vits16_thre5e-1_kmeans25_cosine_FPS_3000.txt,data/VOCdevkit/VOC2012/ImageSets/Main/trainval_dino_vits16_thre5e-1_kmeans25_cosine_FPS_3000.txt
+python tools/train.py configs/pascal_voc/ssd300_voc0712_al.py --work-dir work_dirs/ssd300_voc0712_al_dino_vits16_GEAL_3000 --cfg-options data.train.dataset.ann_file=data/VOCdevkit/VOC2007/ImageSets/Main/trainval_dino_vits16_GEAL_3000.txt,data/VOCdevkit/VOC2012/ImageSets/Main/trainval_dino_vits16_GEAL_3000.txt
 ```
 

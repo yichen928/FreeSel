@@ -3,6 +3,7 @@ import sys
 import argparse
 import pickle
 import cv2
+import json
 
 import torch
 from torch import nn
@@ -21,7 +22,7 @@ from kmeans_pytorch import kmeans
 import random
 from functools import partial
 
-from dataset import VOCReturnIndexDataset
+from dataset import CIFARReturnIndexDataset
 
 
 def extract_feature_pipeline(args):
@@ -47,24 +48,23 @@ def extract_feature_pipeline(args):
     ])
 
     all_features = {}
-    for year in ["2007", "2012"]:
-        dataset_train = VOCReturnIndexDataset(args.data_path, year, transform=transform)
-        data_loader_train = torch.utils.data.DataLoader(
-            dataset_train,
-            batch_size=args.batch_size_per_gpu,
-            num_workers=args.num_workers,
-            pin_memory=True,
-            drop_last=False,
-            shuffle=False
-        )
-        print(f"Data loaded with {len(dataset_train)} trainimgs.")
+    dataset_train = CIFARReturnIndexDataset(args.data_path, transform=transform, download=True)
+    data_loader_train = torch.utils.data.DataLoader(
+        dataset_train,
+        batch_size=args.batch_size_per_gpu,
+        num_workers=args.num_workers,
+        pin_memory=True,
+        drop_last=False,
+        shuffle=False
+    )
+    print(f"Data loaded with {len(dataset_train)} trainimgs.")
 
-        # ============ extract features ... ============
-        print("Extracting features for train set...")
-        train_features, train_ids = extract_features(model, data_loader_train, args)
+    # ============ extract features ... ============
+    print("Extracting features for train set...")
+    train_features, train_ids = extract_features(model, data_loader_train, args)
 
-        for i in range(len(train_features)):
-            all_features[train_ids[i]] = train_features[i]
+    for i in range(len(train_features)):
+        all_features[train_ids[i]] = train_features[i]
 
     # save features and labels
     if args.dump_features:
@@ -108,9 +108,16 @@ def filter_features(dense_features, args, attn=None):
             dense_features_i = dense_features_i[max_id].unsqueeze(0)  # (1, c)
 
         if args.centroid_num is not None and args.centroid_num < dense_features_i.shape[0]:
-            cluster_ids_x, cluster_centers = kmeans(
-                X=dense_features_i, num_clusters=args.centroid_num, distance=args.kmeans_dist_type, iter_limit=100, device=torch.device('cuda:0')
-            )
+            if args.centroid_num > 1:
+                cluster_ids_x, cluster_centers = kmeans(
+                    X=dense_features_i, num_clusters=args.sample_num, distance=args.kmeans_dist_type, iter_limit=100, device=torch.device('cuda:0')
+                )
+            else:
+                if args.kmeans_dist_type == "cosine":
+                    dense_features_i_ = F.normalize(dense_features_i, p=2, dim=1)
+                else:
+                    dense_features_i_ = dense_features_i
+                cluster_centers = torch.mean(dense_features_i_, dim=0, keepdims=True)
             count += cluster_centers.shape[0]
             filtered_features.append(cluster_centers.cuda())
         else:
@@ -178,9 +185,9 @@ if __name__ == '__main__':
     parser.add_argument('--dump_features',
         help='Path where to save computed features, empty for no saving')
     parser.add_argument('--num_workers', default=16, type=int, help='Number of data loading workers per GPU.')
-    parser.add_argument('--data_path', default='data', type=str, help='path for the PSCAL VOC dataset')
+    parser.add_argument('--data_path', default='data/cifar10', type=str, help='path for the CIFAR10 dataset')
     parser.add_argument('--threshold', default=0.5, type=float, help='the attention ratio')
-    parser.add_argument('--centroid_num', default=5, type=int, help='number of kmeans centers')
+    parser.add_argument('--centroid_num', default=1, type=int, help='number of kmeans centers')
     parser.add_argument('--dist_type', type=str, default="cosine", help="cosine or euclidean for K-center-greedy")
     parser.add_argument('--kmeans_dist_type', type=str, default="euclidean", help="cosine or euclidean for kmeans")
     parser.add_argument('--sampling', type=str, default="prob", choices=["prob", "FDS"], help="strategy for sampling")
@@ -209,19 +216,11 @@ if __name__ == '__main__':
         else:
             selected_sample = utils.farthest_distance_sample_dense(merged_features, id2idx, args.selected_num, partial(utils.get_distance, type=args.dist_type), init_ids=init_ids)
 
-    samples_07 = []
-    samples_12 = []
+    selected_ids = []
     for idx in selected_sample:
         id = merged_ids[idx]
-        if "_" in id:
-            samples_12.append(id+"\n")
-        else:
-            samples_07.append(id+"\n")
-
-    samples_07.sort()
-    samples_12.sort()
-    filename = "trainval_%s_%d.txt"%(args.save_name, args.selected_num)
-    with open(os.path.join(args.data_path, "VOCdevkit/VOC2007/ImageSets/Main", filename), "w") as file:
-        file.writelines(samples_07)
-    with open(os.path.join(args.data_path, "VOCdevkit/VOC2012/ImageSets/Main", filename), "w") as file:
-        file.writelines(samples_12)
+        selected_ids.append(int(id))
+    selected_ids.sort()
+    filename = "CIFAR10_%s_%d.json"%(args.save_name, args.selected_num)
+    with open(os.path.join(args.data_path, "splits", filename), "w") as file:
+        json.dump(selected_ids, file)

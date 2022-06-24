@@ -1,8 +1,15 @@
 import torch
 import os
 import json
+import torchvision
 from PIL import Image, ImageFile
 from collections import Counter
+
+
+class CIFARReturnIndexDataset(torchvision.datasets.CIFAR10):
+    def __getitem__(self, index):
+        img, target = super().__getitem__(index)
+        return img, index
 
 
 class VOCReturnIndexDataset(torch.utils.data.Dataset):
