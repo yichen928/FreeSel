@@ -1,5 +1,13 @@
-# Towards General and Efficient Active Learning
-This repo is official code implementation for the paper "Towards General and Efficient Active Learning". You can find the paper on [arXiv](https://arxiv.org/abs/2112.07963). 
+# Towards Free Data Selection with General-Purpose Models
+This repo is official code implementation for our NeurIPS 2023 paper "Towards Free Data Selection with General-Purpose Models". Currently, this repository only contains the implementation for the old version paper: [Towards Free Data Selection with General-Purpose Models](https://arxiv.org/abs/2112.07963). We will update the new version of paper and code soon.
+
+## Update
++ [2023-9-21] 🔥Our paper is accepted by NeurIPS 2023!🔥
++ [2022-6-24] Code for image classification task is available.
++ [2022-3-20] An updated version of GEAL is released with better efficiency, stability, and performance.
++ [2022-2-23] Code for object detection task is available.
+
+## TL;DR
 
 Existing active learning work follows a cumbersome pipeline by repeating the time-consuming model training and batch data selection multiple times on each dataset separately. We challenge this status-quo by proposing a novel general and efficient active learning (GEAL) method in this paper. Utilizing a publicly available model pre-trained on a large dataset, our method can conduct data selection processes on different datasets with a single-pass inference of the same model.
 
@@ -16,10 +24,6 @@ Our method is significantly more efficient than prior arts by hundreds of times,
     <img src="figs/performance.jpg", width="400">
 </div>
 
-## Update
-+ [2022-6-24] Code for image classification task is available.
-+ [2022-3-20] An updated version of GEAL is released with better efficiency, stability, and performance.
-+ [2022-2-23] Code for object detection task is available.
 
 ## Installation
 
@@ -59,10 +63,12 @@ We sincerely thank the authors for their excellent work!
 
 If you find our research helpful, please consider cite it as:
 ```
-@article{xie2021towards,
-  title={Towards General and Efficient Active Learning},
-  author={Xie, Yichen and Tomizuka, Masayoshi and Zhan, Wei},
-  journal={arXiv preprint arXiv:2112.07963},
-  year={2021}
+@inproceedings{
+xie2023towards,
+title={Towards Free Data Selection with General-Purpose Models},
+author={Xie, Yichen and Ding, Mingyu and Tomizuka, Masayoshi and Zhan, Wei},
+booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+year={2023},
+url={https://openreview.net/forum?id=KBXcDAaZE7}
 }
 ```
