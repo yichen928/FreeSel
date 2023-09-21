@@ -64,11 +64,11 @@ We sincerely thank the authors for their excellent work!
 If you find our research helpful, please consider cite it as:
 ```
 @inproceedings{
-xie2023towards,
-title={Towards Free Data Selection with General-Purpose Models},
-author={Xie, Yichen and Ding, Mingyu and Tomizuka, Masayoshi and Zhan, Wei},
-booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
-year={2023},
-url={https://openreview.net/forum?id=KBXcDAaZE7}
+    xie2023towards,
+    title={Towards Free Data Selection with General-Purpose Models},
+    author={Xie, Yichen and Ding, Mingyu and Tomizuka, Masayoshi and Zhan, Wei},
+    booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+    year={2023},
+    url={https://openreview.net/forum?id=KBXcDAaZE7}
 }
 ```
