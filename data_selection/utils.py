@@ -326,7 +326,7 @@ def farthest_distance_sample(all_features, sample_num, dist_func, init_ids=[]):
         return init_ids
 
     if all_features.shape[0] <= sample_num:
-        print("No enough features")
+        print("Not enough features")
         return list(range(all_features.shape[0]))
 
     total_num = all_features.shape[0]
@@ -358,7 +358,7 @@ def farthest_distance_sample_dense(all_features, id2idx, sample_num, dist_func, 
     feature_num = all_features.shape[0]
     total_num = len(id2idx)
     if total_num <= sample_num:
-        print("No enough features")
+        print("Not enough features")
         return list(range(total_num))
 
     idx2id = []
@@ -403,7 +403,7 @@ def prob_seed_dense(all_features, id2idx, sample_num, dist_func, init_ids=[]):
     feature_num = all_features.shape[0]
     total_num = len(id2idx)
     if total_num <= sample_num:
-        print("No enough features")
+        print("Not enough features")
         return list(range(total_num))
 
     idx2id = []
