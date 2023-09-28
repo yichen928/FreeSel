@@ -57,7 +57,7 @@ def extract_feature_pipeline(args):
         drop_last=False,
         shuffle=False
     )
-    print(f"Data loaded with {len(dataset_train)} trainimgs.")
+    print(f"Data loaded with {len(dataset_train)} trainings.")
 
     # ============ extract features ... ============
     print("Extracting features for train set...")
