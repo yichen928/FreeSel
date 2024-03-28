@@ -1,5 +1,5 @@
 # Towards Free Data Selection with General-Purpose Models
-This repo is official code implementation for our NeurIPS 2023 paper "Towards Free Data Selection with General-Purpose Models". Currently, this repository only contains the implementation for the old version paper: [Towards General and Efficient Active Learning](https://arxiv.org/abs/2112.07963). We will update the new version of paper and code soon.
+This repo is official code implementation for our NeurIPS 2023 paper "Towards Free Data Selection with General-Purpose Models". Currently, this repository only contains the implementation for the old version paper. We will update the new version of paper and code soon.
 
 ## Update
 + [2023-9-21] 🔥Our paper is accepted by NeurIPS 2023!🔥
