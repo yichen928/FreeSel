@@ -3,7 +3,7 @@ This repo is official code implementation for our NeurIPS 2023 paper "Towards Fr
 
 ## Update
 + [2023-9-21] 🔥Our paper is accepted by NeurIPS 2023!🔥
-+ [2022-3-20] An updated version of GEAL is released with better efficiency, stability, and performance.
++ [2022-3-20] An updated version is released with better efficiency, stability, and performance.
 + [2022-2-23] Code for object detection task is available.
 
 ## TL;DR
